@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCKLOUD</title>
+</head>
+
+<style>
+html {
+    background-color: black;
+    padding: 10%;
+}
+  .avatarContainer {
+    height: 100px;    
+    width: 100px;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+
+  }
+    .avatarImg{
+        filter: blur(5px);
+        height: inherit;
+        width: inherit;
+       
+
+  /* Add blur filter here */
+    }
+
+    @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+</style>
+
+<body>
+    
+    
+ <div class="avatarContainer">
+    <img class="avatarImg"/>  
+ </div>
+
+    <script>
+        // Fetch data from an HTTP service when the page loads
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch('http://192.168.100.52:3000/api/avatar', {
+                    method : 'POST',
+                       headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: 'cris' })});
+                const jsonResponse = await response.json();
+                // Do something with the data, for example populate the image src in the avatar div
+                const avatarImg = document.querySelector('.avatarImg');
+                avatarImg.src = `data:image/png;base64,${jsonResponse.data}`;
+                console.log(data.result)
+               
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>
